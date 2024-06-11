@@ -14,7 +14,7 @@ def generate_diff(file_path1, file_path2):
         print(f"Error opening file1: {err}")
         data_2 = None
     if (not isinstance(data_1, dict)) or (not isinstance(data_2, dict)):
-        return
+        return ""
     result_str = "{\n"
     ordered_keys_1 = sorted(data_1.keys())
     ordered_keys_2 = sorted(data_2.keys())
@@ -31,7 +31,7 @@ def generate_diff(file_path1, file_path2):
         else:
             result_str += f"  + {key}: {data_2[key]}\n"
     result_str += "\n}"
+    return result_str
 
-    #continue
 
 
