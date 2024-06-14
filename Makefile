@@ -21,4 +21,8 @@ re:
 lint:
 	poetry run flake8 gendiff
 
-.PHONY : install gendiff build publish package-install lint re
+check:
+	make lint
+	poetry run pytest
+
+.PHONY : install gendiff build publish package-install lint re check
