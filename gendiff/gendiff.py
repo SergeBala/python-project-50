@@ -23,7 +23,8 @@ def generate_diff(file_path1, file_path2):
         print(f"Error: The file '{file_path2}' contains invalid JSON.")
         return None
     if (not isinstance(data_1, dict)) or (not isinstance(data_2, dict)):
-        return "Only works with json files that start with curly braces"
+        print("Only works with json files that start with curly braces")
+        return None
     result_str = "{\n"
     sorted_keys1 = sorted(data_1.keys())
     sorted_keys2 = sorted(data_2.keys())

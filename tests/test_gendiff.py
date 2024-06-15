@@ -14,12 +14,22 @@ def expected():
     return expected_string
 
 @pytest.fixture
-def file1_path():
-    return os.path.join(os.path.dirname(__file__), 'fixtures', 'file1.json')
+def file_path():
+    def _file_path(filename):
+        return os.path.join(os.path.dirname(__file__), 'fixtures', filename)
+    return _file_path
 
-@pytest.fixture
-def file2_path():
-    return os.path.join(os.path.dirname(__file__), 'fixtures', 'file2.json')
-
-def test_normal_case(expected, file1_path, file2_path):
+def test_normal_case(file_path, expected):
+    file1_path = file_path('file1.json')
+    file2_path = file_path('file2.json')
     assert generate_diff(file1_path, file2_path) == expected
+
+def test_list_json(file_path):
+    list_json_path = file_path('list.json')
+    file1_path = file_path('file1.json')
+    assert generate_diff(list_json_path, file1_path) == None
+
+def test_empty_json(file_path):
+    empty_json_path = file_path('empty.json')
+    file1_path = file_path('file1.json')
+    assert generate_diff(empty_json_path, file1_path) == None
