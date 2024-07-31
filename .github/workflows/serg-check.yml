@@ -11,12 +11,23 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH  # Add Poetry to PATH
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.9'  # Adjust to your specific Python version if needed
+        python-version: '3.9'
+
+    - name: Check for Poetry
+      run: poetry --version
+
+    - name: Check for Make
+      run: make --version
 
     - name: Install dependencies
       run: |
